@@ -5,6 +5,8 @@ interface APIResponse {
     strMeal: string;
     strMealThumb: string;
     strInstructions: string;
+    strCategory: string;
+    strArea: string;
 }
 
 export const fetchData = async (
@@ -24,7 +26,9 @@ export const fetchData = async (
                     title: meal.strMeal,
                     altImage: meal.strMeal,
                     imageUrl: meal.strMealThumb,
-                    description: meal.strInstructions
+                    description: meal.strInstructions,
+                    category: meal.strCategory,
+                    area: meal.strArea
                 })));
             } else {
                 setResults([])

@@ -13,11 +13,7 @@ const CardResultContainer = ({ mealCards }: CardResultContainerProps) => {
             {
                 mealCards.map((mealCard: MealCardProps, index) => (
                     <Grid size={{xs: 1, sm: 3, md: 4}} key={`${mealCard.title}-${index}`}>
-                        <MealCard
-                            title={mealCard.title}
-                            altImage={mealCard.altImage}
-                            imageUrl={mealCard.imageUrl}
-                            description={mealCard.description}/>
+                        <MealCard {...mealCard} />
                     </Grid>
                 ))
             }
