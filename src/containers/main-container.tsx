@@ -4,7 +4,7 @@ import CardResultContainer from "./card-result-container";
 import {useEffect, useState} from "react";
 import {fetchData} from "../util/http";
 import {MealCardProps} from "../components/meal-card";
-import Spinner from "../components/Spinner";
+import Spinner from "../components/spinner";
 
 const MainContainer = () => {
     const [searchText, setSearchText] = useState("");
