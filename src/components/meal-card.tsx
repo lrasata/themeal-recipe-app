@@ -1,4 +1,5 @@
-import {Card, CardActionArea, CardContent, CardMedia, Chip, Divider, Stack, Typography} from "@mui/material";
+import {Card, CardActionArea, CardContent, CardMedia, Chip, Stack, Typography} from "@mui/material";
+import {RecipeContentProps} from "./recipe-content";
 
 export interface MealCardProps {
     imageUrl: string;
@@ -7,12 +8,14 @@ export interface MealCardProps {
     description: string;
     category: string;
     area: string;
+    onClick?: () => void;
+    recipeContent: RecipeContentProps;
 }
 
-const MealCard = ({imageUrl, altImage, title, description, category, area}: MealCardProps) => {
+const MealCard = ({imageUrl, altImage, title, description, category, area, onClick}: MealCardProps) => {
     return (
         <Card sx={{maxWidth: 345, height: '100%'}}>
-            <CardActionArea>
+            <CardActionArea onClick={onClick}>
                 <CardMedia
                     component="img"
                     alt={altImage}
