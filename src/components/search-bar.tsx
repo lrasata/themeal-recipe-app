@@ -1,4 +1,4 @@
-import {IconButton, InputAdornment, OutlinedInput, TextField} from "@mui/material";
+import {IconButton, InputAdornment, OutlinedInput} from "@mui/material";
 import {useState} from "react";
 import {Close, Search} from "@mui/icons-material";
 

@@ -1,7 +1,7 @@
 import './App.css'
 
 import {createTheme, ThemeProvider} from "@mui/material";
-import SearchBar from "./components/search-bar";
+import MainContainer from "./containers/main-container";
 
 const theme = createTheme({
     typography: {
@@ -24,7 +24,7 @@ function App() {
 
   return (
       <ThemeProvider theme={theme}>
-          <SearchBar searchText={'this is a text'} helperText={'helper text'}/>
+            <MainContainer />
       </ThemeProvider>
   )
 }
