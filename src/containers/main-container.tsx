@@ -1,8 +1,30 @@
 import SearchBar from "../components/search-bar";
-import {Box, Typography} from "@mui/material";
+import {Alert, Box, Typography} from "@mui/material";
 import CardResultContainer from "./card-result-container";
+import {useEffect, useState} from "react";
+import {fetchData} from "../util/http";
+import {MealCardProps} from "../components/meal-card";
+import Spinner from "../components/Spinner";
 
 const MainContainer = () => {
+    const [searchText, setSearchText] = useState("");
+    const [recipes, setRecipes] = useState<MealCardProps[]>([]);
+    const [searchPerformed, setSearchPerformed] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const handleSearch = (searchText: string) => {
+        setSearchText(searchText);
+    }
+
+    useEffect(() => {
+        if (searchText !== '') {
+            setSearchPerformed(true);
+            setLoading(true)
+            fetchData(setRecipes, setLoading, searchText)
+        }
+    }, [searchText]);
+
+
     return <>
         <Box my={6} justifyContent={'center'} display={'flex'} flexDirection={'column'} alignItems={'center'}>
             <Typography component="h1" variant="h4" gutterBottom>
@@ -13,9 +35,23 @@ const MainContainer = () => {
             </Typography>
         </Box>
         <Box mb={3}>
-            <SearchBar searchText={'this is a text'} />
+            <SearchBar handleSearch={handleSearch}/>
         </Box>
-        <CardResultContainer />
+        <>
+            {
+                loading ? <Spinner /> : <>
+                    {
+                        recipes && recipes.length > 0 && <CardResultContainer mealCards={recipes}/>
+                    }
+                    {
+                        recipes.length === 0 && searchPerformed && <Alert severity="info">No recipes found.</Alert>
+                    }
+                </>
+            }
+
+        </>
+
+
     </>
 }
 

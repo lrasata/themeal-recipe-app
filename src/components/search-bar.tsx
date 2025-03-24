@@ -1,23 +1,41 @@
 import {IconButton, InputAdornment, OutlinedInput} from "@mui/material";
-import {useState} from "react";
+import {SetStateAction, useEffect, useState} from "react";
 import {Close, Search} from "@mui/icons-material";
 
 interface SearchBarProps {
-    searchText: string;
+    handleSearch: (searchText: string) => void;
 }
 
-const SearchBar = ({searchText}: SearchBarProps) => {
-    const [inputValue, setInputValue] = useState(searchText);
+const DEBOUNCE_TIME = 700;
+
+const SearchBar = ({handleSearch}: SearchBarProps) => {
+    const [inputValue, setInputValue] = useState("");
+    const [debouncedInputValue, setDebouncedInputValue] = useState("")
 
     const handleClearInput = () => {
         setInputValue("");
     }
 
+    const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+        setInputValue(event.target.value);
+    }
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setDebouncedInputValue(inputValue);
+        }, DEBOUNCE_TIME);
+        return () => clearTimeout(timeoutId);
+    }, [inputValue]);
+
+    useEffect(() => {
+        handleSearch(debouncedInputValue)
+    }, [debouncedInputValue]);
+
     return <OutlinedInput
         value={inputValue}
         fullWidth
         autoFocus={!!inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        onChange={handleInputChange}
         startAdornment={
             <InputAdornment position="start">
                     <Search />
