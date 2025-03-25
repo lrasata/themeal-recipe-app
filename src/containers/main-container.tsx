@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {fetchDataBySearchedTerm} from "../util/http";
 import {MealCardProps} from "../components/meal-card";
 import Spinner from "../components/spinner";
+import FiltersContainer from "./filters-container";
 
 const MainContainer = () => {
     const [searchText, setSearchText] = useState("");
@@ -36,6 +37,7 @@ const MainContainer = () => {
         </Box>
         <Box mb={3}>
             <SearchBar handleSearch={handleSearch}/>
+            <FiltersContainer filters={[]} />
         </Box>
         <>
             {
