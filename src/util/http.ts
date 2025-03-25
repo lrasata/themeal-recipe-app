@@ -1,7 +1,9 @@
 import {SetStateAction} from "react";
 import {MealCardProps} from "../components/meal-card";
 
-interface APIResponse {
+const THE_MEAL_DB_API_URL = `${import.meta.env.VITE_THE_MEAL_API_URL}/json/v1/1/`;
+
+interface MealAPIResponse {
     strMeal: string;
     strMealThumb: string;
     strInstructions: string;
@@ -17,12 +19,34 @@ interface APIResponse {
     strIngredient8: string;
 }
 
-export const fetchData = async (
+export const transformAPIResponse = (meals: MealAPIResponse[]) => {
+    return meals.map((meal: MealAPIResponse) => ({
+        title: meal.strMeal,
+        altImage: meal.strMeal,
+        imageUrl: meal.strMealThumb,
+        description: meal.strInstructions,
+        category: meal.strCategory,
+        area: meal.strArea,
+        instructions: meal.strInstructions,
+        ingredients: [
+            meal.strIngredient1,
+            meal.strIngredient2,
+            meal.strIngredient3,
+            meal.strIngredient4,
+            meal.strIngredient5,
+            meal.strIngredient6,
+            meal.strIngredient7,
+            meal.strIngredient8,
+        ],
+    }))
+}
+
+export const fetchDataBySearchedTerm = async (
     setResults: { (value: SetStateAction<MealCardProps[]>): void; (arg0: any): void; },
     setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void; },
     searchedWord: string
 ) => {
-    const url = `${import.meta.env.VITE_THE_MEAL_API_URL}/json/v1/1/search.php?s=${searchedWord}`;
+    const url = `${THE_MEAL_DB_API_URL}search.php?s=${searchedWord}`;
 
     fetch(url)
         .then((res) => {
@@ -30,29 +54,7 @@ export const fetchData = async (
         })
         .then(({meals}) => {
             if (meals && meals.length > 0) {
-                setResults(meals.map((meal: APIResponse) => ({
-                    title: meal.strMeal,
-                    altImage: meal.strMeal,
-                    imageUrl: meal.strMealThumb,
-                    description: meal.strInstructions,
-                    category: meal.strCategory,
-                    area: meal.strArea,
-                    recipeContent: {
-                        instructions: meal.strInstructions,
-                        ingredients: [
-                            meal.strIngredient1,
-                            meal.strIngredient2,
-                            meal.strIngredient3,
-                            meal.strIngredient4,
-                            meal.strIngredient5,
-                            meal.strIngredient6,
-                            meal.strIngredient7,
-                            meal.strIngredient8,
-                        ],
-                        altImage: meal.strMeal,
-                        imageUrl: meal.strMealThumb,
-                    }
-                })));
+                setResults(transformAPIResponse(meals));
             } else {
                 setResults([])
             }

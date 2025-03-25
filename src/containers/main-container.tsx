@@ -2,7 +2,7 @@ import SearchBar from "../components/search-bar";
 import {Alert, Box, Typography} from "@mui/material";
 import CardResultContainer from "./card-result-container";
 import {useEffect, useState} from "react";
-import {fetchData} from "../util/http";
+import {fetchDataBySearchedTerm} from "../util/http";
 import {MealCardProps} from "../components/meal-card";
 import Spinner from "../components/spinner";
 
@@ -20,7 +20,7 @@ const MainContainer = () => {
         if (searchText !== '') {
             setSearchPerformed(true);
             setLoading(true)
-            fetchData(setRecipes, setLoading, searchText)
+            fetchDataBySearchedTerm(setRecipes, setLoading, searchText)
         }
     }, [searchText]);
 

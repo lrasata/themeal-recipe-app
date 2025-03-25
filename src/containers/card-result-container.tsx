@@ -18,7 +18,14 @@ const CardResultContainer = ({ mealCards }: CardResultContainerProps) => {
     const handleClickOpen = (meal: MealCardProps) => {
         setOpen(true);
         setDialogTitle(meal.title);
-        setRecipeContentToDisplay(meal.recipeContent);
+        setRecipeContentToDisplay(
+            {
+                ingredients: meal.ingredients,
+                instructions: meal.instructions,
+                imageUrl: meal.imageUrl,
+                altImage: meal.altImage
+            }
+        );
 
     };
 

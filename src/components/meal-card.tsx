@@ -1,5 +1,4 @@
 import {Card, CardActionArea, CardContent, CardMedia, Chip, Stack, Typography} from "@mui/material";
-import {RecipeContentProps} from "./recipe-content";
 
 export interface MealCardProps {
     imageUrl: string;
@@ -9,7 +8,8 @@ export interface MealCardProps {
     category: string;
     area: string;
     onClick?: () => void;
-    recipeContent: RecipeContentProps;
+    ingredients: string[];
+    instructions: string;
 }
 
 const MealCard = ({imageUrl, altImage, title, description, category, area, onClick}: MealCardProps) => {
