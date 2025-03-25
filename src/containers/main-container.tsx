@@ -24,11 +24,9 @@ const MainContainer = () => {
     const [areaFilterItems, setAreaFilterItems] = useState<FilterItemProps[]>([]);
 
     useEffect(() => {
-        if (searchWord !== '') {
             setSearchPerformed(true);
             setLoading(true)
             fetchDataBySearchText(setRecipes, setLoading, searchWord);
-        }
     }, [searchWord]);
 
     useEffect(() => {
@@ -45,7 +43,7 @@ const MainContainer = () => {
     return <>
         <Box my={6} justifyContent={'center'} display={'flex'} flexDirection={'column'} alignItems={'center'}>
             <Typography component="h1" variant="h4" gutterBottom>
-                The Meal recipe database
+                The Meal recipe db
             </Typography>
             <Typography variant="subtitle1" color="textSecondary">
                 Search for your favourite meal
