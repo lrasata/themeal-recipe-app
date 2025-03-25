@@ -50,6 +50,7 @@ const SearchBar = ({handleSearch}: SearchBarProps) => {
                 </InputAdornment>
             }
         }
+        placeholder="Enter a meal or an ingredient. ex: rice"
     />
 
 

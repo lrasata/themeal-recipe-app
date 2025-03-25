@@ -14,6 +14,10 @@ export interface FilterProps {
 }
 
 const Filter = ({type, filterItems = []}: FilterProps) => {
+
+    const handleClick = (): void => {
+        alert('Feature is not implemented yet.');
+    }
     return (
         <Accordion>
             <AccordionSummary
@@ -21,13 +25,14 @@ const Filter = ({type, filterItems = []}: FilterProps) => {
                 aria-controls={`filter-content-${type}`}
                 id={`filter-panel-header-${type}`}
             >
-                <Typography component="span">{type}</Typography>
+                <Typography component="span" variant="body2">{type}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} useFlexGap
+                       sx={{ flexWrap: 'wrap' }}>
                     {
                         filterItems.map(filterItem => (
-                            <FilterItemChip key={`filter-panel-header-${type}-${filterItem.name}`} name={filterItem.name} selected={filterItem.selected} />
+                            <FilterItemChip key={`filter-panel-header-${type}-${filterItem.name}`} name={filterItem.name} selected={filterItem.selected} onClick={handleClick} />
                         ))
                     }
                 </Stack>

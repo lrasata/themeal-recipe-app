@@ -1,7 +1,10 @@
 import {SetStateAction} from "react";
 import {MealCardProps} from "../components/meal-card";
+import {FilterItemProps} from "../components/filter";
 
 const THE_MEAL_DB_API_URL = `${import.meta.env.VITE_THE_MEAL_API_URL}/json/v1/1/`;
+const THE_MEAL_DB_API_URL_CATEGORIES = `${import.meta.env.VITE_THE_MEAL_API_URL}/json/v1/1/list.php?c=list`;
+const THE_MEAL_DB_API_URL_AREA = `${import.meta.env.VITE_THE_MEAL_API_URL}/json/v1/1/list.php?a=list`;
 
 interface MealAPIResponse {
     strMeal: string;
@@ -59,6 +62,36 @@ export const fetchDataBySearchedTerm = async (
                 setResults([])
             }
             setLoading(false);
+
+        });
+}
+
+export const fetchDataByFilterType = async (
+    setFilters: { (value: SetStateAction<FilterItemProps[]>): void; (arg0: any): void; },
+    type: 'category' | 'area'
+) => {
+    const url = type === 'category' ? THE_MEAL_DB_API_URL_CATEGORIES : THE_MEAL_DB_API_URL_AREA;
+
+    fetch(url)
+        .then((res) => {
+            return res.json();
+        })
+        .then(({meals}) => {
+            if (meals && meals.length > 0) {
+                setFilters(
+
+                    meals.map((meal) => type === 'category' ? {
+                            name: meal.strCategory,
+                            selected: false
+                        } :
+                        {
+                            name: meal.strArea,
+                            selected: false
+                        }
+                ));
+            } else {
+                setFilters([])
+            }
 
         });
 }
