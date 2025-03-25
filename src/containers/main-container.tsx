@@ -54,7 +54,7 @@ const MainContainer = () => {
             {
                 loading ? <Spinner /> : <>
                     {
-                        recipes && recipes.length > 0 && <CardResultContainer mealCards={recipes}/>
+                        recipes && recipes.length > 0 && <CardResultContainer searchedWord={searchText} mealCards={recipes}/>
                     }
                     {
                         recipes.length === 0 && searchPerformed && <Alert severity="info">No recipes found.</Alert>

@@ -79,7 +79,6 @@ export const fetchDataByFilterType = async (
         .then(({meals}) => {
             if (meals && meals.length > 0) {
                 setFilters(
-
                     meals.map((meal) => type === 'category' ? {
                             name: meal.strCategory,
                             selected: false
@@ -89,9 +88,6 @@ export const fetchDataByFilterType = async (
                             selected: false
                         }
                 ));
-            } else {
-                setFilters([])
             }
-
         });
 }

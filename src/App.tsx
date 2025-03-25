@@ -1,32 +1,27 @@
 import './App.css'
 
-import {createTheme, ThemeProvider} from "@mui/material";
-import MainContainer from "./containers/main-container";
+import ErrorPage from "./pages/error-page";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import HomePage from "./pages/homepage";
+import FavouritesPage from "./pages/favourites-page";
+import RootLayout from "./pages/root-layout";
 
-const theme = createTheme({
-    typography: {
-        fontFamily: [
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
-        ].join(','),
+
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <RootLayout/>,
+        errorElement: <ErrorPage/>,
+        children: [
+            {index: true, element: <HomePage/>},
+            {path: 'favourites', element: <FavouritesPage/>}
+        ],
     }
-});
+]);
 
 function App() {
 
-  return (
-      <ThemeProvider theme={theme}>
-            <MainContainer />
-      </ThemeProvider>
-  )
+    return (<RouterProvider router={router}/>)
 }
 
 export default App

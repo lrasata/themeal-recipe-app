@@ -1,4 +1,4 @@
-import {Box} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import Grid from '@mui/material/Grid2';
 import MealCard, {MealCardProps} from "../components/meal-card";
 import {useState} from "react";
@@ -7,10 +7,11 @@ import {RecipeContentProps} from "../components/recipe-content";
 
 
 interface CardResultContainerProps {
+    searchedWord: string,
     mealCards: MealCardProps[];
 }
 
-const CardResultContainer = ({ mealCards }: CardResultContainerProps) => {
+const CardResultContainer = ({ searchedWord, mealCards }: CardResultContainerProps) => {
     const [open, setOpen] = useState(false);
     const [dialogTitle, setDialogTitle] = useState<string>("");
     const [recipeContentToDisplay, setRecipeContentToDisplay] = useState<RecipeContentProps>();
@@ -34,6 +35,7 @@ const CardResultContainer = ({ mealCards }: CardResultContainerProps) => {
     };
 
     return <Box sx={{flexGrow: 1}}>
+        <Typography variant="subtitle2" my={2}>{`Showing ${mealCards.length} results for "${searchedWord}"`}</Typography>
         <Grid container spacing={{xs: 1, md: 3}} columns={{xs: 1, sm: 6, md: 12}}>
             {
                 mealCards.map((mealCard: MealCardProps, index) => (
