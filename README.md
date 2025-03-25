@@ -1,12 +1,12 @@
-# The Meal Recipe App
+# The Meal recipe database App
 
 This project allows you to look for your favourite recipes thanks to [TheMealDB API](https://www.themealdb.com/).
 
 ## Prerequisites
-Provide the `VITE_THE_MEAL_API_URL` in  `.env`
+Provide the `VITE_THE_MEAL_DB_API_URL` in  `.env`
 
 ```
-VITE_THE_MEAL_API_URL=https://www.themealdb.com/api
+VITE_THE_MEAL_DB_API_URL=https://www.themealdb.com/api
 ```
 
 ## Installation and Setup Instructions

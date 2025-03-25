@@ -9,9 +9,10 @@ import {
     Stack,
     Typography
 } from "@mui/material";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import {ReactElement} from "react";
 
 export interface MealCardProps {
+    id: string;
     imageUrl: string;
     altImage: string;
     title: string;
@@ -22,6 +23,8 @@ export interface MealCardProps {
     onClickCardAction?: () => void;
     ingredients: string[];
     instructions: string;
+    cardActionIcon?: ReactElement;
+    cardActionText?: string;
 }
 
 const MealCard = ({
@@ -32,7 +35,9 @@ const MealCard = ({
                       category,
                       area,
                       onClickOpenDetails,
-                      onClickCardAction
+                      onClickCardAction,
+                      cardActionIcon,
+                      cardActionText
                   }: MealCardProps) => {
     return (
         <Card sx={{maxWidth: 345, height: '100%'}}>
@@ -68,8 +73,7 @@ const MealCard = ({
             </CardActionArea>
             {
                 onClickCardAction && <CardActions>
-                    <Button startIcon={<FavoriteBorderIcon/>} size="small" onClick={onClickCardAction}>Add to
-                        favourites</Button>
+                    <Button startIcon={cardActionIcon} size="small" onClick={onClickCardAction}>{cardActionText}</Button>
                 </CardActions>
             }
 

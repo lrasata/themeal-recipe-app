@@ -3,14 +3,15 @@ import {SetStateAction, useEffect, useState} from "react";
 import {Close, Search} from "@mui/icons-material";
 
 interface SearchBarProps {
+    inputSearchText: string;
     handleSearch: (searchText: string) => void;
 }
 
 const DEBOUNCE_TIME = 700;
 
-const SearchBar = ({handleSearch}: SearchBarProps) => {
-    const [inputValue, setInputValue] = useState("");
-    const [debouncedInputValue, setDebouncedInputValue] = useState("")
+const SearchBar = ({inputSearchText = '', handleSearch}: SearchBarProps) => {
+    const [inputValue, setInputValue] = useState(inputSearchText);
+    const [debouncedInputValue, setDebouncedInputValue] = useState("");
 
     const handleClearInput = () => {
         setInputValue("");
@@ -38,17 +39,17 @@ const SearchBar = ({handleSearch}: SearchBarProps) => {
         onChange={handleInputChange}
         startAdornment={
             <InputAdornment position="start">
-                    <Search />
+                <Search/>
             </InputAdornment>
         }
         {...inputValue !== '' && {
             endAdornment:
                 <InputAdornment position="end">
                     <IconButton onClick={handleClearInput}>
-                        <Close />
+                        <Close/>
                     </IconButton>
                 </InputAdornment>
-            }
+        }
         }
         placeholder="Enter a meal or an ingredient. ex: rice"
     />

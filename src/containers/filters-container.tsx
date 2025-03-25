@@ -10,8 +10,8 @@ const FiltersContainer = ({filters = []}: props) => {
             filters?.length > 0 && <>
                 <Typography variant="subtitle2" gutterBottom>Filters</Typography>
                 {
-                    filters.map((filter) => (
-                        <Filter type={filter.type} filterItems={filter.filterItems} />
+                    filters.map((filter, index) => (
+                        <Filter key={`${filter.type}-${index}`} type={filter.type} filterItems={filter.filterItems} />
                     ))
                 }
             </>

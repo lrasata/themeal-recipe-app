@@ -2,11 +2,12 @@ import {SetStateAction} from "react";
 import {MealCardProps} from "../components/meal-card";
 import {FilterItemProps} from "../components/filter";
 
-const THE_MEAL_DB_API_URL = `${import.meta.env.VITE_THE_MEAL_API_URL}/json/v1/1/`;
-const THE_MEAL_DB_API_URL_CATEGORIES = `${import.meta.env.VITE_THE_MEAL_API_URL}/json/v1/1/list.php?c=list`;
-const THE_MEAL_DB_API_URL_AREA = `${import.meta.env.VITE_THE_MEAL_API_URL}/json/v1/1/list.php?a=list`;
+const THE_MEAL_DB_API_URL = `${import.meta.env.VITE_THE_MEAL_DB_API_URL}/json/v1/1/`;
+const THE_MEAL_DB_API_URL_CATEGORIES = `${import.meta.env.VITE_THE_MEAL_DB_API_URL}/json/v1/1/list.php?c=list`;
+const THE_MEAL_DB_API_URL_AREA = `${import.meta.env.VITE_THE_MEAL_DB_API_URL}/json/v1/1/list.php?a=list`;
 
 interface MealAPIResponse {
+    idMeal: string;
     strMeal: string;
     strMealThumb: string;
     strInstructions: string;
@@ -24,6 +25,7 @@ interface MealAPIResponse {
 
 export const transformAPIResponse = (meals: MealAPIResponse[]) => {
     return meals.map((meal: MealAPIResponse) => ({
+        id: meal.idMeal,
         title: meal.strMeal,
         altImage: meal.strMeal,
         imageUrl: meal.strMealThumb,
@@ -44,7 +46,7 @@ export const transformAPIResponse = (meals: MealAPIResponse[]) => {
     }))
 }
 
-export const fetchDataBySearchedTerm = async (
+export const fetchDataBySearchText = async (
     setResults: { (value: SetStateAction<MealCardProps[]>): void; (arg0: any): void; },
     setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void; },
     searchedWord: string

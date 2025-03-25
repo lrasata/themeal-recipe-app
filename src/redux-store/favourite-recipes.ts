@@ -10,6 +10,10 @@ const favouriteRecipesSlice = createSlice({
             // @ts-ignore
             state.recipes = [...state.recipes, action.payload];
         },
+        removeFromFavouriteRecipes(state, action) {
+            // @ts-ignore
+            state.recipes = [...state.recipes].filter((recipe) => recipe.id !== action.payload.id);
+        },
     },
 });
 
