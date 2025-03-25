@@ -4,6 +4,8 @@ import MealCard, {MealCardProps} from "../components/meal-card";
 import {useState} from "react";
 import Dialog from "../components/dialog";
 import {RecipeContentProps} from "../components/recipe-content";
+import {useDispatch} from "react-redux";
+import {favouriteRecipesActions} from "../redux-store/favourite-recipes";
 
 
 interface CardResultContainerProps {
@@ -15,6 +17,7 @@ const CardResultContainer = ({ searchedWord, mealCards }: CardResultContainerPro
     const [open, setOpen] = useState(false);
     const [dialogTitle, setDialogTitle] = useState<string>("");
     const [recipeContentToDisplay, setRecipeContentToDisplay] = useState<RecipeContentProps>();
+    const dispatch = useDispatch();
 
     const handleClickOpen = (meal: MealCardProps) => {
         setOpen(true);
@@ -30,6 +33,10 @@ const CardResultContainer = ({ searchedWord, mealCards }: CardResultContainerPro
 
     };
 
+    const handleAddToFavourites = (meal: MealCardProps) => {
+        dispatch(favouriteRecipesActions.saveFavouriteRecipes(meal));
+    }
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -40,7 +47,9 @@ const CardResultContainer = ({ searchedWord, mealCards }: CardResultContainerPro
             {
                 mealCards.map((mealCard: MealCardProps, index) => (
                     <Grid size={{xs: 1, sm: 3, md: 4}} key={`${mealCard.title}-${index}`}>
-                        <MealCard {...mealCard} onClick={() => handleClickOpen(mealCard)}/>
+                        <MealCard {...mealCard}
+                                  onClickOpenDetails={() => handleClickOpen(mealCard)}
+                                  onClickCardAction={() => handleAddToFavourites(mealCard)}/>
                     </Grid>
                 ))
             }

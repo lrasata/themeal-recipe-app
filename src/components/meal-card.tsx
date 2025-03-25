@@ -1,4 +1,15 @@
-import {Card, CardActionArea, CardContent, CardMedia, Chip, Stack, Typography} from "@mui/material";
+import {
+    Button,
+    Card,
+    CardActionArea,
+    CardActions,
+    CardContent,
+    CardMedia,
+    Chip,
+    Stack,
+    Typography
+} from "@mui/material";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 export interface MealCardProps {
     imageUrl: string;
@@ -7,15 +18,25 @@ export interface MealCardProps {
     description: string;
     category: string;
     area: string;
-    onClick?: () => void;
+    onClickOpenDetails?: () => void;
+    onClickCardAction?: () => void;
     ingredients: string[];
     instructions: string;
 }
 
-const MealCard = ({imageUrl, altImage, title, description, category, area, onClick}: MealCardProps) => {
+const MealCard = ({
+                      imageUrl,
+                      altImage,
+                      title,
+                      description,
+                      category,
+                      area,
+                      onClickOpenDetails,
+                      onClickCardAction
+                  }: MealCardProps) => {
     return (
         <Card sx={{maxWidth: 345, height: '100%'}}>
-            <CardActionArea onClick={onClick}>
+            <CardActionArea onClick={onClickOpenDetails}>
                 <CardMedia
                     component="img"
                     alt={altImage}
@@ -45,6 +66,13 @@ const MealCard = ({imageUrl, altImage, title, description, category, area, onCli
                     </Typography>
                 </CardContent>
             </CardActionArea>
+            {
+                onClickCardAction && <CardActions>
+                    <Button startIcon={<FavoriteBorderIcon/>} size="small" onClick={onClickCardAction}>Add to
+                        favourites</Button>
+                </CardActions>
+            }
+
 
         </Card>
     );
