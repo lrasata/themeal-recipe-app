@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import {favouriteRecipesActions} from "../redux-store/favourite-recipes";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import Dialog from "../components/dialog";
 
 
@@ -17,10 +18,12 @@ interface CardResultContainerProps {
 }
 
 const CardResultContainer = ({searchedWord, path, mealCards}: CardResultContainerProps) => {
+    const dispatch = useDispatch();
+
     const [open, setOpen] = useState(false);
     const [dialogTitle, setDialogTitle] = useState<string>("");
     const [recipeContentToDisplay, setRecipeContentToDisplay] = useState<RecipeContentProps>();
-    const dispatch = useDispatch();
+
     const title = path === '/' ? `Showing ${mealCards.length} results for "${searchedWord}"` : 'Your favourite recipes';
 
     const handleClickOpen = (meal: MealCardProps) => {
@@ -51,6 +54,26 @@ const CardResultContainer = ({searchedWord, path, mealCards}: CardResultContaine
         setOpen(false);
     };
 
+    const getCardActionIcon = (meal: MealCardProps) => {
+        if (path === '/') {
+            if (meal.isFavourite) {
+                return <FavoriteIcon />
+            }
+            return <FavoriteBorderIcon />
+        }
+        return <DeleteOutlineIcon />
+    }
+
+    const getCardActionText = (meal: MealCardProps) => {
+        if (path === '/') {
+            if (meal.isFavourite) {
+                return "Added to favourites"
+            }
+            return "Add to favourites"
+        }
+        return "Remove from favourites"
+    }
+
     return <Box sx={{flexGrow: 1}}>
         {
             searchedWord !== '' && <Typography variant="subtitle2" my={2}>{title}</Typography>
@@ -61,9 +84,14 @@ const CardResultContainer = ({searchedWord, path, mealCards}: CardResultContaine
                     <Grid size={{xs: 1, sm: 3, md: 4}} key={`${mealCard.title}-${index}`}>
                         <MealCard {...mealCard}
                                   onClickOpenDetails={() => handleClickOpen(mealCard)}
-                                  onClickCardAction={() => path === '/' ? handleAddToFavourites(mealCard) : handleRemoveFromFavourites(mealCard)}
-                                  cardActionIcon={path === '/' ? <FavoriteBorderIcon/> : <DeleteOutlineIcon />}
-                                  cardActionText={path === '/' ? "Add to favourites" : "Remove from favourites"}
+                                  cardActionIcon={getCardActionIcon(mealCard)}
+                                  cardActionText={getCardActionText(mealCard)}
+                                  {...path === '/' && !mealCard.isFavourite && {
+                                      onClickCardAction: () => handleAddToFavourites(mealCard)
+                                  }}
+                                  {...path !== '/' && {
+                                      onClickCardAction: () => handleRemoveFromFavourites(mealCard)
+                                  }}
                         />
                     </Grid>
                 ))

@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
-const initialFavouriteRecipesState = {recipes: []};
+const initialFavouriteRecipesState = {recipes: [] };
 
 const favouriteRecipesSlice = createSlice({
     name: 'favouriteRecipes',

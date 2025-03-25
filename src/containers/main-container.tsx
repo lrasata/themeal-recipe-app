@@ -13,10 +13,13 @@ import {searchTextActions} from "../redux-store/search-text";
 const MainContainer = () => {
     // @ts-ignore
     const searchTextSelector = useSelector(state => state.searchText.searchText);
+    // @ts-ignore
+    const favouriteRecipesSelector = useSelector(state => state.favouriteRecipes.recipes);
+
     const dispatch = useDispatch();
 
     const [searchWord, setSearchWord] = useState(searchTextSelector);
-    const [recipes, setRecipes] = useState<MealCardProps[]>([]);
+    const [recipes, setRecipes] = useState<MealCardProps[]>([]); // TODO to improve UX save this in redux store so it is not fetched all the time
     const [searchPerformed, setSearchPerformed] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -26,8 +29,8 @@ const MainContainer = () => {
     useEffect(() => {
             setSearchPerformed(true);
             setLoading(true)
-            fetchDataBySearchText(setRecipes, setLoading, searchWord);
-    }, [searchWord]);
+            fetchDataBySearchText(setRecipes, setLoading, searchWord, [...favouriteRecipesSelector]);
+    }, [searchWord, favouriteRecipesSelector]);
 
     useEffect(() => {
         // TODO this can be optimised to handle x amount of filters

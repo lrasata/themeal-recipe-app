@@ -23,7 +23,7 @@ interface MealAPIResponse {
     strIngredient8: string;
 }
 
-export const transformAPIResponse = (meals: MealAPIResponse[]) => {
+export const transformAPIResponse = (meals: MealAPIResponse[], favouriteRecipes: MealCardProps[]) => {
     return meals.map((meal: MealAPIResponse) => ({
         id: meal.idMeal,
         title: meal.strMeal,
@@ -43,13 +43,15 @@ export const transformAPIResponse = (meals: MealAPIResponse[]) => {
             meal.strIngredient7,
             meal.strIngredient8,
         ],
+        isFavourite: favouriteRecipes.filter( recipe => recipe.id === meal.idMeal).length === 1
     }))
 }
 
 export const fetchDataBySearchText = async (
     setResults: { (value: SetStateAction<MealCardProps[]>): void; (arg0: any): void; },
     setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void; },
-    searchedWord: string
+    searchedWord: string,
+    favouriteRecipes: MealCardProps[]
 ) => {
     const url = `${THE_MEAL_DB_API_URL}search.php?s=${searchedWord}`;
 
@@ -59,7 +61,7 @@ export const fetchDataBySearchText = async (
         })
         .then(({meals}) => {
             if (meals && meals.length > 0) {
-                setResults(transformAPIResponse(meals));
+                setResults(transformAPIResponse(meals, favouriteRecipes));
             } else {
                 setResults([])
             }

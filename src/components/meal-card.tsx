@@ -25,6 +25,7 @@ export interface MealCardProps {
     instructions: string;
     cardActionIcon?: ReactElement;
     cardActionText?: string;
+    isFavourite?: boolean;
 }
 
 const MealCard = ({
@@ -72,8 +73,8 @@ const MealCard = ({
                 </CardContent>
             </CardActionArea>
             {
-                onClickCardAction && <CardActions>
-                    <Button startIcon={cardActionIcon} size="small" onClick={onClickCardAction}>{cardActionText}</Button>
+                <CardActions>
+                    <Button startIcon={cardActionIcon} size="small" {...onClickCardAction && {onClick: onClickCardAction}} {...!onClickCardAction && {disabled: true}}>{cardActionText}</Button>
                 </CardActions>
             }
 
