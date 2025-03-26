@@ -2,6 +2,8 @@
 
 This project allows you to look for your favourite recipes thanks to [TheMealDB API](https://www.themealdb.com/).
 
+This project has been built for training to showcase usage of `React, Redux, Redux toolkit, Redux thunk and React router`
+
 ## Prerequisites
 Provide the `VITE_THE_MEAL_DB_API_URL` in  `.env`
 
