@@ -13,4 +13,19 @@ export default defineConfig({
     setupFiles: './src/test/setup.ts',
     css: true,
   },
+  build: {
+    outDir: 'dist',
+    sourcemap: false, // Disable sourcemaps in production for security
+    minify: 'terser', // Use Terser for better minification
+    chunkSizeWarningLimit: 500, // Increase warning limit
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor'; // Split vendor files for better caching
+          }
+        },
+      },
+    },
+  },
 })

@@ -1,6 +1,6 @@
 import Filter from "../components/filter";
 import {Box, Typography} from "@mui/material";
-import {FilterProps} from "../components/types";
+import {FilterProps} from "../components/types.tsx";
 
 interface props {
     filters: FilterProps[];

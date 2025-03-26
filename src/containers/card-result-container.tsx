@@ -8,7 +8,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Dialog from "../components/dialog";
-import {MealCardProps, RecipeContentProps} from "../components/types";
+import {MealCardProps, RecipeContentProps} from "../components/types.tsx";
 import {fetchedRecipesActions} from "../redux-store/fetched-recipes-slice";
 
 

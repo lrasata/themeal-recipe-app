@@ -2,11 +2,11 @@ import SearchBar from "../components/search-bar";
 import {Alert, Box, Typography} from "@mui/material";
 import CardResultContainer from "./card-result-container";
 import {useEffect, useState} from "react";
-import {fetchDataByFilterType} from "../util/http";
+import {fetchDataByFilterType} from "../util/http.tsx";
 import Spinner from "../components/spinner";
 import FiltersContainer from "./filters-container";
 import {useDispatch, useSelector} from "react-redux";
-import {FilterItemProps} from "../components/types";
+import {FilterItemProps} from "../components/types.tsx";
 import {fetchDataBySearchText} from "../redux-store/fetched-recipes-slice";
 
 const MainContainer = () => {
