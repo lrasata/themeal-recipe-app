@@ -25,7 +25,10 @@ export const fetchDataBySearchText = createAsyncThunk(
                         recipes: transformAPIResponse(meals, arg.favouriteRecipes)
                     }
                 } else {
-                    return []
+                    return {
+                        searchText: arg.searchedWord,
+                        recipes: []
+                    }
                 }
             });
 

@@ -35,7 +35,6 @@ const SearchBar = ({inputSearchText, handleSearch}: SearchBarProps) => {
     return <OutlinedInput
         value={inputValue}
         fullWidth
-        autoFocus={!!inputValue}
         onChange={handleInputChange}
         startAdornment={
             <InputAdornment position="start">
