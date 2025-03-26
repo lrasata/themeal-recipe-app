@@ -60,8 +60,6 @@ const MealCard = ({
                     <Button startIcon={cardActionIcon} size="small" {...onClickCardAction && {onClick: onClickCardAction}} {...!onClickCardAction && {disabled: true}}>{cardActionText}</Button>
                 </CardActions>
             }
-
-
         </Card>
     );
 }

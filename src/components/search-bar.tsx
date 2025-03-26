@@ -9,9 +9,9 @@ interface SearchBarProps {
 
 const DEBOUNCE_TIME = 700;
 
-const SearchBar = ({inputSearchText = '', handleSearch}: SearchBarProps) => {
+const SearchBar = ({inputSearchText, handleSearch}: SearchBarProps) => {
     const [inputValue, setInputValue] = useState(inputSearchText);
-    const [debouncedInputValue, setDebouncedInputValue] = useState("");
+    const [debouncedInputValue, setDebouncedInputValue] = useState(inputValue);
 
     const handleClearInput = () => {
         setInputValue("");

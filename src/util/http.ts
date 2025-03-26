@@ -1,6 +1,6 @@
 import {SetStateAction} from "react";
 import {FilterItemProps, MealCardProps} from "../components/types";
-import {THE_MEAL_DB_API_URL, THE_MEAL_DB_API_URL_AREA, THE_MEAL_DB_API_URL_CATEGORIES} from "./constants";
+import { THE_MEAL_DB_API_URL_AREA, THE_MEAL_DB_API_URL_CATEGORIES} from "./constants";
 
 interface MealAPIResponse {
     idMeal: string;
@@ -41,29 +41,6 @@ export const transformAPIResponse = (meals: MealAPIResponse[], favouriteRecipes:
         ],
         isFavourite: favouriteRecipes.filter( recipe => recipe.id === meal.idMeal).length === 1
     }))
-}
-
-export const fetchDataBySearchText = async (
-    setResults: { (value: SetStateAction<MealCardProps[]>): void; (arg0: any): void; },
-    setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void; },
-    searchedWord: string,
-    favouriteRecipes: MealCardProps[]
-) => {
-    const url = `${THE_MEAL_DB_API_URL}search.php?s=${searchedWord}`;
-
-    fetch(url)
-        .then((res) => {
-            return res.json();
-        })
-        .then(({meals}) => {
-            if (meals && meals.length > 0) {
-                setResults(transformAPIResponse(meals, favouriteRecipes));
-            } else {
-                setResults([])
-            }
-            setLoading(false);
-
-        });
 }
 
 export const fetchDataByFilterType = async (

@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import favouriteRecipesReducer from "./favourite-recipes";
-import searchTextReducer from "./search-text"
+import favouriteRecipesReducer from "./favourite-recipes-slice";
+import fetchedRecipesReducer from "./fetched-recipes-slice";
 
 const store = configureStore({
-    reducer: { searchText: searchTextReducer, favouriteRecipes: favouriteRecipesReducer },
+    reducer: { fetchedRecipes: fetchedRecipesReducer, favouriteRecipes: favouriteRecipesReducer }
 });
 
 export default store;

@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid2';
 import MealCard from "../components/meal-card";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {favouriteRecipesActions} from "../redux-store/favourite-recipes";
+import {favouriteRecipesActions} from "../redux-store/favourite-recipes-slice";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import FavoriteIcon from '@mui/icons-material/Favorite';

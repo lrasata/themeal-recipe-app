@@ -20,8 +20,7 @@ const Filter = ({type, filterItems = []}: FilterProps) => {
                 <Typography component="span" variant="body2">{capitalizeFirstLetter(type)}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <Stack direction="row" spacing={2} useFlexGap
-                       sx={{ flexWrap: 'wrap' }}>
+                <Stack direction="row" spacing={2} useFlexGap sx={{ flexWrap: 'wrap' }}>
                     {
                         filterItems.map(filterItem => (
                             <FilterItemChip key={`filter-panel-header-${type}-${filterItem.name}`} name={filterItem.name} selected={filterItem.selected} onClick={handleClick} />
