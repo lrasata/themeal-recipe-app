@@ -9,6 +9,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Dialog from "../components/dialog";
 import {MealCardProps, RecipeContentProps} from "../components/types";
+import {fetchedRecipesActions} from "../redux-store/fetched-recipes-slice";
 
 
 interface CardResultContainerProps {
@@ -42,6 +43,7 @@ const CardResultContainer = ({searchedWord, path, mealCards}: CardResultContaine
 
     const handleAddToFavourites = (meal: MealCardProps) => {
         dispatch(favouriteRecipesActions.saveFavouriteRecipes(meal));
+        dispatch(fetchedRecipesActions.updateToFavourites({id: meal.id}));
     }
 
     const handleRemoveFromFavourites = (meal: MealCardProps) => {

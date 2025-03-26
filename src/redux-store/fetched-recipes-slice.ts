@@ -38,7 +38,14 @@ export const fetchDataBySearchText = createAsyncThunk(
 const fetchedRecipesSlice = createSlice({
     name: 'fetchedRecipes',
     initialState: initialFetchedRecipesState,
-    reducers: {},
+    reducers: {
+        updateToFavourites(state, action) {
+            // @ts-ignore
+            state.recipes = [...state.recipes].map((recipe: MealCardProps)  => (
+                recipe.id !== action.payload.id ? recipe : { ...recipe, isFavourite: !recipe.isFavourite }
+            ));
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchDataBySearchText.pending, (state) => {
             state.isLoading = true
