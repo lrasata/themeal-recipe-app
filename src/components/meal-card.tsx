@@ -7,7 +7,8 @@ import {
     CardMedia,
     Chip,
     Stack,
-    Typography
+    Typography,
+    useTheme
 } from "@mui/material";
 import {MealCardProps} from "./types";
 
@@ -23,8 +24,11 @@ const MealCard = ({
                       cardActionIcon,
                       cardActionText
                   }: MealCardProps) => {
+    const theme = useTheme()
+    const isMobile = theme.breakpoints.down('sm');
+
     return (
-        <Card sx={{maxWidth: 345, height: '100%'}}>
+        <Card sx={{maxWidth: isMobile ? '100%' : 345, height: '100%'}}>
             <CardActionArea onClick={onClickOpenDetails}>
                 <CardMedia
                     component="img"

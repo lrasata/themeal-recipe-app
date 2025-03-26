@@ -1,5 +1,5 @@
 import {IconButton, InputAdornment, OutlinedInput} from "@mui/material";
-import {SetStateAction, useEffect, useState} from "react";
+import {KeyboardEvent, SetStateAction, useEffect, useRef, useState} from "react";
 import {Close, Search} from "@mui/icons-material";
 
 interface SearchBarProps {
@@ -12,6 +12,7 @@ const DEBOUNCE_TIME = 700;
 const SearchBar = ({inputSearchText, handleSearch}: SearchBarProps) => {
     const [inputValue, setInputValue] = useState(inputSearchText);
     const [debouncedInputValue, setDebouncedInputValue] = useState(inputValue);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleClearInput = () => {
         setInputValue("");
@@ -19,6 +20,16 @@ const SearchBar = ({inputSearchText, handleSearch}: SearchBarProps) => {
 
     const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }) => {
         setInputValue(event.target.value);
+    }
+
+    const handleOnClickSearch = () => {
+        handleSearch(inputValue);
+    };
+
+    const handleOnKeyDown = (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        if (event.key === "Enter") {
+            handleSearch(inputValue);
+        }
     }
 
     useEffect(() => {
@@ -36,21 +47,21 @@ const SearchBar = ({inputSearchText, handleSearch}: SearchBarProps) => {
         value={inputValue}
         fullWidth
         onChange={handleInputChange}
-        startAdornment={
-            <InputAdornment position="start">
-                <Search/>
+        endAdornment={
+            <InputAdornment position="end">
+                <IconButton onClick={handleOnClickSearch}>
+                    <Search/>
+                </IconButton>
+                {
+                    inputValue !== '' && <IconButton onClick={handleClearInput}><Close/></IconButton>
+                }
+
             </InputAdornment>
         }
-        {...inputValue !== '' && {
-            endAdornment:
-                <InputAdornment position="end">
-                    <IconButton onClick={handleClearInput}>
-                        <Close/>
-                    </IconButton>
-                </InputAdornment>
-        }
-        }
         placeholder="Enter a meal or an ingredient. ex: rice"
+        ref={inputRef}
+        autoFocus={false}
+        onKeyDown={(event) => handleOnKeyDown(event)}
     />
 
 
