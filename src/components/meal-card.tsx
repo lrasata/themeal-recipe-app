@@ -9,24 +9,7 @@ import {
     Stack,
     Typography
 } from "@mui/material";
-import {ReactElement} from "react";
-
-export interface MealCardProps {
-    id: string;
-    imageUrl: string;
-    altImage: string;
-    title: string;
-    description: string;
-    category: string;
-    area: string;
-    onClickOpenDetails?: () => void;
-    onClickCardAction?: () => void;
-    ingredients: string[];
-    instructions: string;
-    cardActionIcon?: ReactElement;
-    cardActionText?: string;
-    isFavourite?: boolean;
-}
+import {MealCardProps} from "./types";
 
 const MealCard = ({
                       imageUrl,

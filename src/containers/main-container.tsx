@@ -3,12 +3,11 @@ import {Alert, Box, Typography} from "@mui/material";
 import CardResultContainer from "./card-result-container";
 import {useEffect, useState} from "react";
 import {fetchDataByFilterType, fetchDataBySearchText} from "../util/http";
-import {MealCardProps} from "../components/meal-card";
 import Spinner from "../components/spinner";
 import FiltersContainer from "./filters-container";
-import {FilterItemProps} from "../components/filter";
 import {useDispatch, useSelector} from "react-redux";
 import {searchTextActions} from "../redux-store/search-text";
+import {FilterItemProps, MealCardProps} from "../components/types";
 
 const MainContainer = () => {
     // @ts-ignore

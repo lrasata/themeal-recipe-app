@@ -1,13 +1,7 @@
 import {Dialog as MuiDialog, DialogContent, DialogTitle, IconButton} from "@mui/material";
 import {Close} from "@mui/icons-material";
-import RecipeContent, {RecipeContentProps} from "./recipe-content";
-
-export interface DialogProps {
-    open: boolean;
-    onClose: (value: string) => void;
-    title: string;
-    recipeContent?: RecipeContentProps;
-}
+import RecipeContent from "./recipe-content";
+import {DialogProps} from "./types";
 
 const Dialog = (props: DialogProps) => {
     const { onClose, open, title, recipeContent } = props;

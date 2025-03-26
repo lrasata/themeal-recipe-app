@@ -2,17 +2,7 @@ import {Accordion, AccordionDetails, AccordionSummary, Stack, Typography} from "
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FilterItemChip from "./filter-item-chip";
 import {capitalizeFirstLetter} from "../util/util";
-
-export interface FilterItemProps{
-    name: string;
-    selected: boolean;
-    onClick?: () => void;
-}
-
-export interface FilterProps {
-    type: string;
-    filterItems: FilterItemProps[]
-}
+import {FilterProps} from "./types";
 
 const Filter = ({type, filterItems = []}: FilterProps) => {
 

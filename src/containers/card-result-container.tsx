@@ -1,14 +1,14 @@
 import {Box, Typography} from "@mui/material";
 import Grid from '@mui/material/Grid2';
-import MealCard, {MealCardProps} from "../components/meal-card";
+import MealCard from "../components/meal-card";
 import {useState} from "react";
-import {RecipeContentProps} from "../components/recipe-content";
 import {useDispatch} from "react-redux";
 import {favouriteRecipesActions} from "../redux-store/favourite-recipes";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Dialog from "../components/dialog";
+import {MealCardProps, RecipeContentProps} from "../components/types";
 
 
 interface CardResultContainerProps {

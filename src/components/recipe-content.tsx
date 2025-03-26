@@ -1,11 +1,5 @@
 import {Card, CardMedia, Divider, Typography} from "@mui/material";
-
-export interface RecipeContentProps {
-    ingredients: string[];
-    instructions: string;
-    imageUrl: string;
-    altImage: string;
-}
+import {RecipeContentProps} from "./types";
 
 const RecipeContent = ({ingredients, instructions, imageUrl, altImage}: RecipeContentProps) => (
     <>

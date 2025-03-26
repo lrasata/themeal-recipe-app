@@ -1,10 +1,6 @@
 import {SetStateAction} from "react";
-import {MealCardProps} from "../components/meal-card";
-import {FilterItemProps} from "../components/filter";
-
-const THE_MEAL_DB_API_URL = `${import.meta.env.VITE_THE_MEAL_DB_API_URL}/json/v1/1/`;
-const THE_MEAL_DB_API_URL_CATEGORIES = `${import.meta.env.VITE_THE_MEAL_DB_API_URL}/json/v1/1/list.php?c=list`;
-const THE_MEAL_DB_API_URL_AREA = `${import.meta.env.VITE_THE_MEAL_DB_API_URL}/json/v1/1/list.php?a=list`;
+import {FilterItemProps, MealCardProps} from "../components/types";
+import {THE_MEAL_DB_API_URL, THE_MEAL_DB_API_URL_AREA, THE_MEAL_DB_API_URL_CATEGORIES} from "./constants";
 
 interface MealAPIResponse {
     idMeal: string;
@@ -72,7 +68,7 @@ export const fetchDataBySearchText = async (
 
 export const fetchDataByFilterType = async (
     setFilters: { (value: SetStateAction<FilterItemProps[]>): void; (arg0: any): void; },
-    type: 'category' | 'area'
+    type: "category" | "area"
 ) => {
     const url = type === 'category' ? THE_MEAL_DB_API_URL_CATEGORIES : THE_MEAL_DB_API_URL_AREA;
 
@@ -83,7 +79,7 @@ export const fetchDataByFilterType = async (
         .then(({meals}) => {
             if (meals && meals.length > 0) {
                 setFilters(
-                    meals.map((meal) => type === 'category' ? {
+                    meals.map((meal : {strCategory?: string, strArea?: string}) => type === 'category' ? {
                             name: meal.strCategory,
                             selected: false
                         } :
