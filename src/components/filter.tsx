@@ -1,7 +1,6 @@
 import {Accordion, AccordionDetails, AccordionSummary, Stack, Typography} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FilterItemChip from "./filter-item-chip";
-import {capitalizeFirstLetter} from "../util/util";
 import {FilterProps} from "./types";
 
 const Filter = ({type, filterItems = []}: FilterProps) => {
@@ -17,7 +16,7 @@ const Filter = ({type, filterItems = []}: FilterProps) => {
                 aria-controls={`filter-content-${type}`}
                 id={`filter-panel-header-${type}`}
             >
-                <Typography component="span" variant="body2">{capitalizeFirstLetter(type)}</Typography>
+                <Typography component="span" variant="body2">{type[0].toUpperCase() + type.slice(1)}</Typography>
             </AccordionSummary>
             <AccordionDetails>
                 <Stack direction="row" spacing={2} useFlexGap sx={{ flexWrap: 'wrap' }}>

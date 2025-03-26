@@ -54,6 +54,7 @@ const fetchedRecipesSlice = createSlice({
             state.isLoading = false
             // @ts-ignore
             state.recipes = action.payload.recipes;
+            // @ts-ignore
             state.searchText = action.payload.searchText;
         })
         builder.addCase(fetchDataBySearchText.rejected, (state, action) => {

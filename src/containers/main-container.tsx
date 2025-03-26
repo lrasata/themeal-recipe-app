@@ -32,6 +32,7 @@ const MainContainer = () => {
 
     const handleSearch = (searchText: string) => {
         setSearchWord(searchText);
+        // @ts-ignore
         dispatch(fetchDataBySearchText({searchedWord: searchText, favouriteRecipes: [...favouriteRecipesSelector] }))
     }
 
