@@ -34,6 +34,9 @@ To Visit App:
 
 `http://localhost:5173/`
 
+To Test:
+`npm run test`
+
 ## Future improvements
 - Make filters work to narrow down the results
   ![filters](./docs/filters.png)
