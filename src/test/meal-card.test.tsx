@@ -2,7 +2,7 @@ import { render, screen} from "@testing-library/react";
 import { describe, expect, test } from 'vitest'
 import MealCard from "../components/meal-card";
 
-const mealCardData = {
+export const mealCardData = {
     id: '1',
     title: 'Pizza',
     altImage: 'pizza',
